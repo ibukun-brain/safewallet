@@ -95,7 +95,7 @@ Pick a ticket on the [Github Repository](https://github.com/ibukun-brain/safewal
 git clone https://github.com/ibukun-brain/safewallet
 ```
 
-When creating a new branch, **ENSURE** that the branch name starts with the format **SSS-&lt;issue-no&gt;-&lt;short-description&gt;** e.g. **ARI-1-project-setup** and the main branch is from develop. use the command below when creating a new branch.
+When creating a new branch, **ENSURE** that the branch name starts with the format **SSS-&lt;issue-no&gt;-&lt;short-description&gt;** e.g. **SW-1-project-setup** and the main branch is from develop. use the command below when creating a new branch.
 
 ```
 git checkout develop

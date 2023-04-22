@@ -1,4 +1,4 @@
-# SafeWallet ![](https://github.com/ibukun-brain/Airbnb-clone/workflows/Test%20and%20Release%20Django%20Project/badge.svg)
+# SafeWallet ![](https://github.com/ibukun-brain/safewallet/workflows/Test%20and%20Release%20Django%20Project/badge.svg)
 
 
 A platform for teaching and mentoring students in tech

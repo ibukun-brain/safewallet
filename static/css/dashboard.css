@@ -1,0 +1,40 @@
+.card-top{
+    font-size: 12px;
+}
+
+.card-action-box{
+    max-width: 100%;
+    min-width: 80%;
+}
+
+.card-action{
+    font-size: 13px;
+}
+
+.card-action-icon-bg{
+    background-color: #f8f9fa;
+    padding: 8px 8px;
+    border-radius:3px;
+    color: #000 !important;
+}
+
+.bi-arrow-bar-down::before {
+    content: "\f112";
+    font-weight: 600 !important;
+}
+
+.bi-arrow-left-right::before {
+    content: "\f12b";
+    font-weight: bold !important;
+}
+
+.bi-arrow-bar-up::before {
+    content: "\f115";
+    font-weight: 600 !important;
+}
+
+form > button{
+    background: none !important;
+    border:none;
+    color: #fff;
+}

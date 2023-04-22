@@ -1,0 +1,76 @@
+{% load humanize %}
+{% if hide_balance %}
+<h4 id="walletBalance" hx-swap-oob="true">*********</h4>
+
+<div class="card-top d-flex" id="hideBalance">
+    <span>Total Balance</span>
+    <div class="hide-or-show-icon mx-1">
+        {% if request.user.wallet.is_hidden %}
+            <form method="post" action="{% url 'home:show-balance' %}" hx-post="{% url 'home:show-balance' %}" hx-target="#hideBalance" hx-swap="outerHTML">
+                <input type="hidden" id="show_balance" name="show_balance"/>
+                <button class="text-white">
+                    <span><i class="bi bi-eye-slash-fill"></i></span>
+                </button>
+            </form>
+        {% else %}
+            <form method="post" action="{% url 'home:hide-balance' %}" hx-post="{% url 'home:hide-balance' %}" hx-target="#hideBalance" hx-swap="outerHTML">
+                <input type="hidden" id="hide_balance" name="hide_balance"/>
+                <button class="text-white">
+                    <span><i class="bi bi-eye-fill"></i></span>
+                </button>
+            </form>
+        {% endif %}
+    </div>
+{% else %}
+<h5 id="walletBalance" hx-swap-oob="true">₦{{user.wallet.balance|intcomma}}</h5>
+
+<div class="card-top d-flex" id="hideBalance">
+    <span>Total Balance</span>
+    <div class="hide-or-show-icon mx-1">
+        {% if request.user.wallet.is_hidden %}
+            <form method="post" action="{% url 'home:show-balance' %}" hx-post="{% url 'home:show-balance' %}" hx-target="#hideBalance" hx-swap="outerHTML">
+                <input type="hidden" id="show_balance" name="show_balance"/>
+                <button class="text-white">
+                    <span><i class="bi bi-eye-slash-fill"></i></span>
+                </button>
+            </form>
+        {% else %}
+            <form method="post" action="{% url 'home:hide-balance' %}" hx-post="{% url 'home:hide-balance' %}" hx-target="#hideBalance" hx-swap="outerHTML">
+                <input type="hidden" id="hide_balance" name="hide_balance"/>
+                <button class="text-white">
+                    <span><i class="bi bi-eye-fill"></i></span>
+                </button>
+            </form>
+        {% endif %}
+    </div>
+{% endif %}
+{% comment %} {% if hide_balance %}
+
+    <h4 id="walletBalance" hx-swap-oob="true">*********</h4>
+    <div class="card-top d-flex"> 
+        <span>Total Balance</span>
+        <div class="hide-or-show-icon mx-1">
+            <form method="post" action="{% url 'home:show-balance' %}" hx-post="{% url 'home:show-balance' %}" hx-target="#walletBalance" hx-swap="outerHTML">
+                {% csrf_token %}
+                <input type="hidden" id="hide_balance" name="hide_balance"/>
+                <button class="text-white">
+                    <span><i class="bi bi-eye-slash-fill"></i></span>
+                </button>
+            </form>
+        </div>
+    </div>    
+{% else %} 
+<h5 id="walletBalance" hx-swap-oob="true">₦{{user.wallet.balance|intcomma}}</h5>
+
+<div class="card-top d-flex ">
+    <span>Total Balance</span>
+    <div class="hide-or-show-icon mx-1">
+        <form method="post" action="{% url 'home:hide-balance' %}" hx-post="{% url 'home:hide-balance' %}" hx-target="#walletBalance" hx-swap="outerHTML">
+            <input type="hidden" id="hide_balance" name="hide_balance"/>
+            <button class="text-white">
+                <span><i class="bi bi-eye-fill"></i></span>
+            </button>
+        </form>
+    </div>
+</div>
+{% endif %} {% endcomment %}

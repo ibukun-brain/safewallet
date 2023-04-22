@@ -1,0 +1,176 @@
+{% load format_number %}
+<div class="col-xl-4 col-md-6 col-sm-8" id="addMoney">
+    <div class="card bg-dark px-3 py-2 text-white" id="addMoney">
+        <a class="text-white text-decoration-none" href="{% url 'home:wallet' %}" hx-get="{% url 'home:wallet' %}" hx-target="#addMoney" hx-push-url="true"><i class="bi bi-arrow-left-short fs-4"></i>Add money</a>
+        <div class="container mr-5">
+            <div class="row align-items-start" style="background: #343A40;">
+                <div class="col-sm-1 text-white pt-3 mb-3">
+                        <div class="text-center rounded-circle"><i class="bi bi-bank"></i></div>
+                </div>   
+
+                <div class="col-sm-8 text-white pt-3 mb-3">
+                    <p class="card-title lh-sm">Bank Transfer</p>
+                    <p class="small-text lh-sm" style="font-size: 8px !important; margin-top: -5px">Add money via mobile or internet banking</p>
+                </div>   
+
+                <div class="col-sm-2 text-white pt-3 mb text-end">
+                    <span><i class="bi bi-arrow-right"></i></span>
+                </div>
+                <div class="col-sm-12">   
+                    <hr style="border-top: dashed 2px; margin-top: -10px" />
+                </div>
+                <div class="col-sm-8">   
+                <p class="small-text lh-" style="font-size: 9px !important; margin:-5px 0">Account Number</p>
+                    <h4 class="mt-2" id="accountNumber">{{user.wallet.account_number|space_number}}</h4>
+                </div>
+                <div class="col-sm-4 text-end" id="copyBtnContainer">
+                    <a id="copyBtn" onclick="copyText()" class="text-white text-decoration-none bg-secondary px-2 py-2 rounded-1 text-center" style="font-size: 11px;">Copy&nbsp;&nbsp;<i class="bi bi-clipboard"></i></a>
+                </div>
+            </div>
+            
+            <div class="row align-items-start mt-3" style="background: #343A40;">
+                <div class="col-sm-1 text-white pt-3 mb-3">
+                        <div class="text-center rounded-circle"><i class="bi bi-bank"></i></div>
+                </div>   
+
+                <div class="col-sm-8 text-white pt-3 mb-3">
+                    <p class="card-title lh-sm">Bank Transfer</p>
+                    <p class="small-text lh-sm" style="font-size: 8px !important; margin-top: -5px">Add money via mobile or internet banking</p>
+                </div>   
+
+                <div class="col-sm-2 text-white pt-3 text-end">
+                    <span><i class="bi bi-arrow-right"></i></span>
+                </div>
+                
+            </div>
+
+            <div class="row align-items-start mt-3" style="background: #343A40;">
+                <div class="col-sm-1 text-white pt-3 mb-3">
+                        <div class="text-center rounded-circle"><i class="bi bi-credit-card-2-front"></i></div>
+                </div>   
+
+                <div class="col-sm-8 text-white pt-3 mb-3">
+                    <p class="card-title lh-sm">Top up with Card/Account</p>
+                    <p class="small-text lh-sm" style="font-size: 8px !important; margin-top: -5px">Add money directly from your bank card or account</p>
+                </div>   
+
+                <div class="col-sm-2 text-white pt-3 text-end">
+                    <span><i class="bi bi-arrow-right"></i></span>
+                </div>
+                
+            </div>
+
+
+            <div class="row align-items-start mt-3" style="background: #343A40;">
+                <div class="col-sm-1 text-white pt-3 mb-3">
+                        <div class="text-center rounded-circle"><i class="bi bi-cash"></i></div>
+                </div>   
+
+                <div class="col-sm-8 text-white pt-3 mb-3">
+                    <p class="card-title lh-sm">Cash Desposit</p>
+                    <p class="small-text lh-sm" style="font-size: 8px !important; margin-top: -5px">Fund your account with nearby merchants</p>
+                </div>   
+
+                <div class="col-sm-2 text-white pt-3 text-end">
+                    <span><i class="bi bi-arrow-right"></i></span>
+                </div>
+                
+            </div>
+
+            <div class="row align-items-start mt-3" style="background: #343A40;">
+                <div class="col-sm-1 text-white pt-3 mb-3">
+                        <div class="text-center rounded-circle"><i class="bi bi-sim"></i></div>
+                </div>   
+
+                <div class="col-sm-8 text-white pt-3 mb-3">
+                    <p class="card-title lh-sm">Bank USSD</p>
+                    <p class="small-text lh-sm" style="font-size: 8px !important; margin-top: -5px">With other banks USSD code</p>
+                </div>   
+
+                <div class="col-sm-2 text-white pt-3 text-end">
+                    <span><i class="bi bi-arrow-right"></i></span>
+                </div>
+                
+            </div>
+
+            <div class="row align-items-start mt-3" style="background: #343A40;">
+                <div class="col-sm-1 text-white pt-3 mb-3">
+                        <div class="text-center rounded-circle"><i class="bi bi-piggy-bank"></i></div>
+                </div>   
+
+                <div class="col-sm-8 text-white pt-3 mb-3">
+                    <p class="card-title lh-sm">Request Money from Others</p>
+                    <p class="small-text lh-sm" style="font-size: 8px !important; margin-top: -5px">Send a request to any user</p>
+                </div>   
+
+                <div class="col-sm-2 text-white pt-3 text-end">
+                    <span><i class="bi bi-arrow-right"></i></span>
+                </div>
+                
+            </div>
+
+            <div class="row align-items-start mt-3" style="background: #343A40;">
+                <div class="col-sm-1 text-white pt-3 mb-3">
+                        <div class="text-center rounded-circle"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-qr-code-scan" viewBox="0 0 16 16">
+                            <path d="M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1v2.5a.5.5 0 0 1-1 0v-3Zm12 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0V1h-2.5a.5.5 0 0 1-.5-.5ZM.5 12a.5.5 0 0 1 .5.5V15h2.5a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5Zm15 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H15v-2.5a.5.5 0 0 1 .5-.5ZM4 4h1v1H4V4Z"/>
+                            <path d="M7 2H2v5h5V2ZM3 3h3v3H3V3Zm2 8H4v1h1v-1Z"/>
+                            <path d="M7 9H2v5h5V9Zm-4 1h3v3H3v-3Zm8-6h1v1h-1V4Z"/>
+                            <path d="M9 2h5v5H9V2Zm1 1v3h3V3h-3ZM8 8v2h1v1H8v1h2v-2h1v2h1v-1h2v-1h-3V8H8Zm2 2H9V9h1v1Zm4 2h-1v1h-2v1h3v-2Zm-4 2v-1H8v1h2Z"/>
+                            <path d="M12 9h2V8h-2v1Z"/>
+                          </svg></div>
+                </div>   
+
+                <div class="col-sm-8 text-white pt-3 mb-3">
+                    <p class="card-title lh-sm">Scan my QR Code</p>
+                    <p class="small-text lh-sm" style="font-size: 8px !important; margin-top: -5px">Scan QR code to any user</p>
+                </div>   
+
+                <div class="col-sm-2 text-white pt-3 text-end">
+                    <span><i class="bi bi-arrow-right"></i></span>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+{% block scripts %}
+    <script type="text/javascript">
+        let accountNumber = document.querySelector("#accountNumber").innerText;
+        let copyBtnContainer = document.querySelector("#copyBtnContainer");
+        const copyBtn = document.querySelector("#copyBtn");
+        function copyText() {
+            let textVal = accountNumber.replace(/\s/g, '')
+        
+            let copiedText = navigator.clipboard.writeText(textVal);
+            alert("Copied the text: " + textVal);
+            const copiedBtn = document.createElement('a')
+            copiedBtn.setAttribute('id', 'copiedBtn')
+            copiedBtn.style.fontSize = '11px'
+            copiedBtn.style.cursor = 'pointer'
+            copiedBtn.classList.add('text-white', 'copiedBtn', 'text-decoration-none', 'bg-secondary', 'px-2', 'py-2', 'rounded-1', 'text-center')
+            copiedBtn.innerHTML = `Copied&nbsp;&nbsp;<i class="bi bi-clipboard-check"></i>`
+            copyBtnContainer.appendChild(copiedBtn)
+            copyBtn.style.display = 'none'
+
+            function showCopyBtn() {
+                const copiedBtn = document.querySelector('#copiedBtn')
+                const copiedBtns = document.querySelectorAll('.copiedBtn')
+
+                copiedBtn.remove()
+                copyBtn.style.display = 'inline'
+
+            }
+        
+            setTimeout(showCopyBtn, 3000)
+        
+        }
+
+
+        
+        
+        
+    </script>
+{% endblock scripts %}

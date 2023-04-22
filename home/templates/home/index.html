@@ -1,0 +1,80 @@
+{% extends 'partials/_base.html' %}
+{% load static humanize %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock stylesheets %}
+{% block title %}Dashboard{% endblock title %}
+{% block hx_headers %}hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'{% endblock hx_headers %}
+{% block body %}
+    <div class="container my-3">
+        <div class="row justify-content-center">
+            <div class="col-xl-4 col-md-6 col-sm-8" id="addMoney">
+                <div class="card bg-dark px-3 py-4 text-white">
+                    <div class="d-flex justify-content-between fs-6">
+                        <div class="card-top d-flex" id="hideBalance">
+                            <span>Total Balance</span>
+                            <div class="hide-or-show-icon mx-1">
+                                {% if request.user.wallet.is_hidden %}
+                                    <form method="post" action="{% url 'home:show-balance' %}" hx-post="{% url 'home:show-balance' %}" hx-target="#hideBalance" hx-swap="outerHTML">
+                                        <input type="hidden" id="show_balance" name="show_balance"/>
+                                        <button class="text-white">
+                                            <span><i class="bi bi-eye-slash-fill"></i></span>
+                                        </button>
+                                    </form>
+                                {% else %}
+                                    <form method="post" action="{% url 'home:hide-balance' %}" hx-post="{% url 'home:hide-balance' %}" hx-target="#hideBalance" hx-swap="outerHTML">
+                                        <input type="hidden" id="hide_balance" name="hide_balance"/>
+                                        <button class="text-white">
+                                            <span><i class="bi bi-eye-fill"></i></span>
+                                        </button>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="card-top">
+                            <a href="#" class="text-white text-decoration-none">
+                                Transaction History
+                                <i class="bi bi-arrow-right-short" style="font-size:15px"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    {% if user.wallet.is_hidden %}
+                        <h4 id="walletBalance" hx-swap-oob="true">*********</h4>
+                    {% else %}
+                        <h5 id="walletBalance" hx-swap-oob="true">₦{{user.wallet.balance|intcomma}}</h5>
+                    {% endif %}
+                    
+                    <div class="">
+                        <div class="row card-action-box justify-content-between mx-auto">
+                            <div class="col-4 card-action text-center">
+                                <a hx-get="{% url 'home:add-money' %}" href="{% url 'home:add-money' %}" class="text-dark card-action-icon-bg text-decoration-none" hx-target="#addMoney" hx-swap="outerHTML" hx-push-url="true">
+                                    <i class="bi bi-arrow-bar-down fs-5 card-action-icon"></i>
+                                </a>
+                                <p class="mt-2"><a class="text-white text-decoration-none" hx-get="{% url 'home:add-money' %}" href="{% url 'home:add-money' %}" hx-target="#addMoney" hx-swap="outerHTML" hx-push-url="true">Add money</a></p>
+                            </div>
+                
+                            <div class="col-4 card-action text-center text-decoration-none" >
+                                <a href="#" class="text-dark card-action-icon-bg">
+                                    <i class="bi bi-arrow-left-right fs-5 card-action-icon"></i>
+                                </a>
+                                <p class="mt-2">Transfer</p>
+                            </div>
+                
+                            <div class="col-4 card-action text-center text-decoration-none" >
+                                <a href="#" class="text-dark card-action-icon-bg">
+                                    <i class="bi bi-arrow-bar-up fs-5 card-action-icon"></i>
+                                </a>
+                                <p class="mt-2">Withdraw</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        </div>
+
+    </div>
+{% endblock body %}

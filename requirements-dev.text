@@ -1,0 +1,17 @@
+-r requirements.txt
+pylint==2.13.0
+black==22.1.0
+coverage==6.3.2
+flake8==4.0.1
+ipython==8.0.1
+isort==5.10.1
+autopep8
+faker
+isort
+pylint==2.13
+flake8
+pytest-django==4.5.2
+pytest-cov==3.0.0
+pytest-xdist==2.5.0
+pytest-mock==3.7.0
+

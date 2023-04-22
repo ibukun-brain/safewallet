@@ -1,15 +1,15 @@
-# Aritek Consult
+# SafeWallet
 
 A platform for teaching and mentoring students in tech
 
-## Useful links
+<!-- ## Useful links
 
-- [Gitlab repo](https://gitlab.com/ecclesit/aritek)
-- [Theme](https://codescandy.com/coach/bootstrap-5/index.html)
+- [Github repo](https://github.com/ibukun-brain/safewallet)
+- [Theme](https://codescandy.com/coach/bootstrap-5/index.html) -->
 
 ## Requirements
 
-- Python / Django 3.2
+- Python / Django 4.2
 
 ## Project setup
 
@@ -60,13 +60,13 @@ python manage.py loaddata ../data.json
 ## Important steps
 
 ### Pre development
-- Go to the GitLab issue board (https://gitlab.com/ecclesit/aritek/-/boards)
+- Go to the Github issues (https://github.com/ibukun-brain/safewallet/issues/)
 - In the `selected for development` lane, choose a ticket an assign to yourself
 - Move the chosen ticket to in progress
 - Create a branch in your local pc but branching from the develop branch.
 
 ```sh
-git checkout -b ARI-1/lowercased-short-description
+git checkout -b SW-1/lowercased-short-description
 ```
 
 ### Dev complete
@@ -80,19 +80,19 @@ flake8
 python manage.py test --keepdb -v 2
 ```
 
-- If successful, `git push` your code to Gitlab
+- If successful, `git push` your code to Github
 - Create a merge request using the link generated from the terminal
 ### Dev complete
 
 - Notify two colleagues to perform code reviews
-- If code review is successful, merge to develop and move ticket to `closed` lane on Gitlab
+- If code review is successful, merge to develop and move ticket to `closed` lane on Github
 
 ## Contribution
 
-Pick a ticket on the [Gitlab repository](https://gitlab.com/ecclesit/aritek). If you haven't cloned the repository, use the command to clone from the terminal
+Pick a ticket on the [Github Repository](https://github.com/ibukun-brain/safewallet). If you haven't cloned the repository, use the command to clone from the terminal
 
 ```sh
-git clone https://gitlab.com/ecclesit/aritek
+git clone https://github.com/ibukun-brain/safewallet
 ```
 
 When creating a new branch, **ENSURE** that the branch name starts with the format **SSS-&lt;issue-no&gt;-&lt;short-description&gt;** e.g. **ARI-1-project-setup** and the main branch is from develop. use the command below when creating a new branch.
@@ -192,7 +192,7 @@ make lint
 make migrate
 ```
 
-* Pushes committed changes to the Gitlab remote repository
+* Pushes committed changes to the Github remote repository
 
 ```sh
 make push

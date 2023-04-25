@@ -20,7 +20,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("", include("home.urls", namespace="home")),
-    path("wallet/", include("accounts.urls", namespace="account_wallet")),
     path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
 ]
@@ -30,6 +29,12 @@ extra_patterns = [
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(
+        settings.MEDIA_URL,
+        document_root=settings.MEDIA_ROOT
+    )
+    urlpatterns += static(
+        settings.STATIC_URL,
+        document_root=settings.STATIC_ROOT
+    )
     urlpatterns += extra_patterns

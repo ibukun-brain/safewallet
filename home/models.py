@@ -1,7 +1,7 @@
 import uuid
-import auto_prefetch
-
 from decimal import Decimal
+
+import auto_prefetch
 
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator
@@ -21,11 +21,14 @@ class Wallet(TimeBasedModel):
     account_name = models.CharField(max_length=250)
     account_number = models.CharField(max_length=10)
     account_preference = models.CharField(max_length=50)
-    balance = models.DecimalField(decimal_places=2, max_digits=11, validators=[MinValueValidator(Decimal('0.01'))])    
-    bank = models.CharField(max_length=20)    
+    balance = models.DecimalField(
+        decimal_places=2,
+        max_digits=11,
+        default=0.00,
+        validators=[MinValueValidator(Decimal('0.01'))]
+    )
+    bank = models.CharField(max_length=20)
     is_hidden = models.BooleanField(default=False)
-
 
     def __str__(self):
         return f"{self.user}'s wallet"
-    

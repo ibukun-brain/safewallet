@@ -9,7 +9,6 @@ from wallet.utils.choices import Gender
 from wallet.utils.media import image_upload_path, default_profile_image
 from wallet.utils.managers import CustomUserManager
 
-# Create your models here.
 
 class CustomUser(AbstractUser):
     USERNAME_FIELD = "username"
@@ -44,7 +43,3 @@ class CustomUser(AbstractUser):
             return self.profile_pic.url
 
         return f"{settings.MEDIA_URL}/default/user-default.png"
-
-
-
-    

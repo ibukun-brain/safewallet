@@ -12,18 +12,18 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 
 from pathlib import Path
+from wallet.settings.packages.all_auth_settings import *
 from wallet.utils.env_variable import get_env_variable
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-6#qc9b!$q%_b452_zl)q_zdy9##dt!&un(4wvy!6^02x@m^ytu'
+SECRET_KEY = get_env_variable("SECRET_KEY", "XXXX")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'accounts',
     'wallet',
     'home',
-   
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -106,9 +105,7 @@ WSGI_APPLICATION = 'wallet.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    
-}
+DATABASES = {}
 
 
 # Password validation
@@ -154,12 +151,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 LOGIN_REDIRECT_URL = "home:dashboard"
 LOGOUT_REDIRECT_URL = "account_login"
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_AUTHENTICATION_METHOD = "username_email"
-ACCOUNT_FORMS = {
-    'signup':'accounts.forms.RegistrationForm'
-}
-
 
 FLUTTERWAVE_SECRET_KEY = get_env_variable("FLUTTERWAVE_SECRET_KEY", "XXX")
-PUBLIC_SECRET_KEY = get_env_variable("PUBLIC_SECRET_KEY", "XXX")
+PUBLIC_SECRET_KEY = get_env_variable("FLUTTERWAVE_PUBLIC_KEY", "XXX")

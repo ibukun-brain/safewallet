@@ -1,7 +1,9 @@
+import uuid
 import auto_prefetch
+
 from django.db import models
 from django.utils.text import slugify
-import uuid
+
 from wallet.utils.managers import VisibleManager
 
 
@@ -33,8 +35,6 @@ class NamedTimeBasedModel(TimeBasedModel):
         return self.name
 
 
-
-# DO WE NEED THIS CATEGORY MODEL??
 class CategoryModel(TimeBasedModel):
     name = models.CharField(max_length=60, unique=True)
     slug = models.SlugField(null=True, blank=True, max_length=250)

@@ -1,4 +1,6 @@
+import random
 from django import forms
+
 from django.contrib.auth.forms import UserCreationForm
 from accounts.models import CustomUser
 
@@ -10,7 +12,6 @@ class RegistrationForm(UserCreationForm):
         fields = [
             'first_name',
             'last_name',
-            'username',
             'email',
             'mobile_no',
             'password1',
@@ -19,5 +20,15 @@ class RegistrationForm(UserCreationForm):
         widgets = {
             "first_name": forms.TextInput(attrs={"required": "required"}),
             "last_name": forms.TextInput(attrs={"required": "required"}),
-            "date_of_birth": forms.DateInput(attrs={"type": "date"})
         }
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        username = self.cleaned_data.get("username", "")
+        if username == "":
+            user.username = (
+                f'{self.cleaned_data.get("first_name")}\
+                {random.randint(1, 1000)}'
+            ).strip()
+        user.save()
+        return user

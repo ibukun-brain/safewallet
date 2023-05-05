@@ -10,6 +10,7 @@ class WalletAPI:
         self.url = "https://api.flutterwave.com/v3"
         self.sandbox = "https://api.flutterwave.com/v3"
         self.secret_key = settings.FLUTTERWAVE_SECRET_KEY
+        print(self.secret_key)
         self.public_key = settings.FLUTTERWAVE_PUBLIC_KEY
 
     def check_balance(self):
@@ -121,16 +122,17 @@ class WalletAPI:
         resp = json.loads(r.text, strict=False)
         return resp
 
-    def create_user_wallet(self, account_name, email, mobilenumber, country):
+    def create_user_wallet(self, account_name, email, mobilenumber, country, bank_code):
         url = self.url + "/payout-subaccounts/"
         headers = {
-            'Authorization': "Bearer " + self.secret_key,
+            "Authorization": f"Bearer {self.secret_key}",
             "Content-Type": "application/json"}
         payload = {
             "account_name": account_name,
             "mobilenumber": mobilenumber,
             "email": email,
             "country": country,
+            "bank_code": bank_code
         }
         print("payload:", payload)
         print("payload json:", json.dumps(payload))

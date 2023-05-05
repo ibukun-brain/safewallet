@@ -1,4 +1,4 @@
-# SafeWallet ![](https://github.com/ibukun-brain/safewallet/workflows/Test%20and%20Release%20Django%20Project/badge.svg)
+# SafeWallet ![](https://github.com/ibukun-brain/safewallet/workflows/CI/badge.svg)
 
 
 A fintech app for banking, vtu and many more

@@ -1,6 +1,6 @@
 from django.urls import reverse_lazy
 
-ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_AUTHENTICATION_METHOD = "email"
 
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = reverse_lazy(
     "account_login")
@@ -40,6 +40,7 @@ ACCOUNT_USERNAME_MIN_LENGTH = 5
 ACCOUNT_USERNAME_REQUIRED = False
 
 ACCOUNT_USER_MODEL_USERNAME_FIELD = "username"
+
 
 ACCOUNT_FORMS = {
     'signup': 'accounts.forms.RegistrationForm'

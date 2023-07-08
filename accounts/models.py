@@ -17,7 +17,13 @@ class CustomUser(AbstractUser):
 
     uid = models.UUIDField(default=uuid.uuid4)
     email = models.EmailField(verbose_name="email address", unique=True)
-    mobile_no = models.CharField(max_length=11, null=True, blank=True)
+    mobile_no = models.CharField(
+        max_length=11,
+        unique=True,
+        error_messages={
+            "unique": ("A user with that Mobile Number already exists."),
+        }
+    )
     date_of_birth = models.DateField(blank=True, null=True)
     gender = models.CharField(
         max_length=15, choices=Gender.choices, null=True, blank=True
@@ -34,7 +40,7 @@ class CustomUser(AbstractUser):
     prefetch_manager = auto_prefetch.Manager()
 
     def __str__(self):
-        return self.get_full_name() or self.email
+        return self.email
 
     @property
     def image_url(self):

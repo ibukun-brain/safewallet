@@ -25,7 +25,7 @@ class Wallet(TimeBasedModel):
         decimal_places=2,
         max_digits=11,
         default=0.00,
-        validators=[MinValueValidator(Decimal('0.01'))]
+        validators=[MinValueValidator(Decimal('0.00'))]
     )
     bank = models.CharField(max_length=20)
     is_hidden = models.BooleanField(default=False)

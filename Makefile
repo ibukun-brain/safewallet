@@ -2,7 +2,7 @@ backup_path = "wallet/.fixtures/backup.json"
 branch_name = $$(git branch --show-current)
 changed_files = $$(git ls-files '*.py')
 os_type = $$(uname -sr)
-number = --number
+proj_name = wallet
 
 all: help
 checks: lint test
@@ -14,7 +14,7 @@ install: update
 # 	esac
 
 backup:
-	mkdir -p airbnb/.fixtures
+	mkdir -p wallet/.fixtures
 	python -Xutf8 manage.py dumpdata \
 		--natural-primary \
 		--exclude=contenttypes \
@@ -74,3 +74,9 @@ update:
 
 graph:
 	python manage.py graph_models --pydot -a -g -o safewallet-design.png
+
+beat:
+	celery -A $(proj_name) beat -l info
+
+worker:
+	celery -A $(proj_name) worker -l info --concurrency 1 -P solo

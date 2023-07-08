@@ -12,8 +12,11 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 
 from pathlib import Path
+
 from wallet.settings.packages.all_auth_settings import *
+from wallet.settings.packages.celery_settings import *
 from wallet.utils.env_variable import get_env_variable
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent

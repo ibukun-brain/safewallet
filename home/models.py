@@ -19,8 +19,9 @@ class Wallet(TimeBasedModel):
         on_delete=models.CASCADE
     )
     account_name = models.CharField(max_length=250)
-    account_number = models.CharField(max_length=10)
-    account_preference = models.CharField(max_length=50)
+    nuban = models.CharField(max_length=10)
+    account_number = models.CharField(max_length=10, blank=True)
+    account_reference = models.CharField(max_length=50)
     balance = models.DecimalField(
         decimal_places=2,
         max_digits=11,

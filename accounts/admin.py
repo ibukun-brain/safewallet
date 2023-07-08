@@ -15,7 +15,6 @@ class CustomUserAdmin(UserAdmin):
             _("Personal info"),
             {
                 "fields": (
-                    "username",
                     "first_name",
                     "last_name",
                     "uid",
@@ -46,20 +45,21 @@ class CustomUserAdmin(UserAdmin):
         (None, {
             "classes": (
                 "wide",), "fields": (
+                "first_name", "last_name",
+                "email", "mobile_no",
                 "password1", "password2"), },), )
     list_display = [
         "first_name",
         "last_name",
         "email",
         "is_staff",
-        'username',
         'date_joined',
         'last_login',
         "is_superuser",
         'is_staff',
         'verified'
     ]
-    ordering = ("first_name", "last_name","username")
+    ordering = ("first_name", "last_name",)
     list_display_links = ["first_name", "email"]
     list_filter = ["date_joined", "gender", "verified"]
-    list_select_related = []
+    readonly_fields = ['uid']

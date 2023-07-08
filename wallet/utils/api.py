@@ -1,17 +1,15 @@
 import json
 import requests
 
-from django.conf import settings
+from wallet.utils.env_variable import get_env_variable
 
 
 class WalletAPI:
 
     def __init__(self, secret_key=None, public_key=None):
         self.url = "https://api.flutterwave.com/v3"
-        self.sandbox = "https://api.flutterwave.com/v3"
-        self.secret_key = settings.FLUTTERWAVE_SECRET_KEY
-        print(self.secret_key)
-        self.public_key = settings.FLUTTERWAVE_PUBLIC_KEY
+        self.secret_key = get_env_variable("FLUTTERWAVE_SECRET_KEY")
+        self.public_key = get_env_variable("FLUTTERWAVE_PUBLIC_KEY")
 
     def check_balance(self):
         url = self.sandbox + "/self/balance"
@@ -34,6 +32,7 @@ class WalletAPI:
         except Exception as e:
             raise e
         resp = json.loads(r.text, strict=False)
+        print(resp)
         return resp
 
     def check_transactions(self, date_from, date_to, transaction_type=1):
@@ -122,7 +121,18 @@ class WalletAPI:
         resp = json.loads(r.text, strict=False)
         return resp
 
-    def create_user_wallet(self, account_name, email, mobilenumber, country, bank_code):
+    def create_user_wallet(
+        self,
+        account_name,
+        email,
+        mobilenumber,
+        country,
+        bank_code=None
+    ):
+        """
+        Creates Wallet for Users `bank_code` is not required but
+        Expected values are 035 (Wema bank) and 232(Sterling bank).
+        """
         url = self.url + "/payout-subaccounts/"
         headers = {
             "Authorization": f"Bearer {self.secret_key}",
@@ -134,8 +144,6 @@ class WalletAPI:
             "country": country,
             "bank_code": bank_code
         }
-        print("payload:", payload)
-        print("payload json:", json.dumps(payload))
 
         try:
             r = requests.post(
@@ -148,31 +156,31 @@ class WalletAPI:
             raise e
 
         resp = json.loads(r.text)
-        print(resp)
         return resp
 
-    def retrieve_user_nuban(self, phone_number):
-        url = self.sandbox + "/wallet/nuban"
+    def retrieve_user_virtual_account_number(self, account_reference):
+        """
+        Retrieves user virtual account number after successful
+        wallet creation.
+        """
+        url = self.url + f"/payout-subaccounts/{account_reference}/" + \
+            "static-account?currency=NGN"
+
         headers = {
-            'Authorization': "Bearer " + self.public_key,
+            "Authorization": f"Bearer {self.secret_key}",
             "Content-Type": "application/json"
-        }
-        payload = {
-            "phoneNumber": phone_number,
-            "secretKey": self.secret_key,
         }
 
         try:
-            r = requests.post(
+            r = requests.get(
                 url,
-                data=json.dumps(payload),
                 headers=headers,
                 timeout=60
             )
         except Exception as e:
             raise e
 
-        resp = json.loads(r.text, strict=False)
+        resp = json.loads(r.text)
         return resp
 
     def set_user_password(self, phone_number, password):
@@ -368,6 +376,26 @@ class WalletAPI:
             raise e
 
         resp = json.loads(r.text, strict=False)
+        return resp
+
+    def verify_user_transaction(self, id):
+        url = self.url + f"/{id}/verify"
+
+        headers = {
+            'Authorization': f"Bearer {self.secret_key}",
+            "Content-Type": "application/json"
+        }
+
+        try:
+            r = requests.get(
+                url,
+                headers=headers,
+                timeout=60
+            )
+        except Exception as e:
+            raise e
+
+        resp = json.loads(r.text)
         return resp
 
     def get_user_transaction_details(self, transaction_id):

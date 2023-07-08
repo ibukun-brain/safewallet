@@ -21,14 +21,3 @@ class RegistrationForm(UserCreationForm):
             "first_name": forms.TextInput(attrs={"required": "required"}),
             "last_name": forms.TextInput(attrs={"required": "required"}),
         }
-
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        username = self.cleaned_data.get("username", "")
-        if username == "":
-            user.username = (
-                f'{self.cleaned_data.get("first_name")}\
-                {random.randint(1, 1000)}'
-            ).strip()
-        user.save()
-        return user
